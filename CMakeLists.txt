@@ -10,6 +10,9 @@ add_library(model SHARED model/model.c)
 add_library(update SHARED update/update.c)
 add_library(view SHARED views/drawView.c)
 add_library(home SHARED views/homeView.c)
+add_library(login SHARED views/loginView.c)
+add_library(initDb SHARED data/initDb.c)
+add_library(staf SHARED data/staf.c)
 
 
-target_link_libraries(sibela PRIVATE draw utils model update view home ncurses)
+target_link_libraries(sibela PRIVATE draw utils model update view login initDb staf home ncurses form)

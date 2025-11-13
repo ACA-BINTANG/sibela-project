@@ -1,5 +1,5 @@
-#ifndef homeView
-#define homeView
+#ifndef murid
+#define murid
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,9 +8,7 @@
 #include <ncurses.h>
 #include "../model/model.h"
 #include "../libs/utils.h"
+#include "../types/dbTypes.h"
 #include "../components/header.h"
-#include "../data/staf.h"
-
-void drawHome(windowModel *window);
 
 #endif

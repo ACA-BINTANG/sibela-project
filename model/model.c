@@ -3,6 +3,8 @@
 windowModel initWindow()
 {
     initscr();
+    cbreak();
+    noecho();
     start_color();
 
     init_pair(1, COLOR_WHITE, COLOR_BLACK);

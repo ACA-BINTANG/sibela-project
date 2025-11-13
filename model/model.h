@@ -11,6 +11,7 @@ typedef enum
 {
     HOME,
     LOGIN,
+    ADMINSTUDENT
 } WINDOWS;
 
 typedef struct

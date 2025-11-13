@@ -2,7 +2,7 @@
 
 void drawHome(windowModel *window)
 {
-    char options[3][15] = {"admin", "pelajar", "wikwok"};
+    char options[2][50] = {"info", "Login"};
 
     WINDOW *menus = newwin(5, 15, LINES - 10, COLS / 2 - 7);
     wborder(menus, '|', '|', '-', '-', '+', '+', '+', '+');

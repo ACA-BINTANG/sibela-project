@@ -7,6 +7,9 @@
         "model.h": "c",
         "draw.h": "c",
         "utils.h": "c",
-        "header.h": "c"
+        "header.h": "c",
+        "murid.h": "c",
+        "initdb.h": "c",
+        "staf.h": "c"
     }
 }
