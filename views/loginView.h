@@ -10,6 +10,7 @@
 #include "../libs/utils.h"
 #include "../components/header.h"
 #include "../data/staf.h"
+#include "../constants/color.h"
 
 void drawLogin(windowModel *windowM);
 

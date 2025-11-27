@@ -14,6 +14,7 @@ model/model.c
 update/update.c
 views/drawView.c
 views/homeView.c
+views/loginView.c
 data/initDb.c
 data/staf.c
 components/header.c

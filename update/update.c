@@ -5,7 +5,7 @@ void updateView(windowModel *windowM)
     int ch = GetKeyPressed();
     switch (ch)
     {
-    case KEY_Q:
+    case KEY_ESCAPE:
         windowM->shouldClose = 1;
         break;
     }
@@ -22,8 +22,8 @@ void updateView(windowModel *windowM)
         case KEY_DOWN:
             windowM->curPos += 1;
             break;
-        case KEY_KP_2:
-            windowM->currWindow = ADMINSTUDENT;
+        case KEY_F2:
+            windowM->currWindow = LOGIN;
             break;
 
         case KEY_SPACE:
@@ -34,7 +34,69 @@ void updateView(windowModel *windowM)
         }
         break;
     case LOGIN:
+        switch (ch)
+        {
+        case KEY_TAB:
+            break;
 
-        break;
+        case KEY_DOWN:
+            windowM->loginData.activeInput++;
+            break;
+        case KEY_UP:
+            windowM->loginData.activeInput--;
+            break;
+
+        default:
+            switch (windowM->loginData.activeInput)
+            {
+            case 0:
+                ch = GetCharPressed();
+                while (ch > 0)
+                {
+                    if ((ch >= 32) && (ch <= 125) && (windowM->loginData.email.charLen < 100))
+                    {
+                        windowM->loginData.email.text[windowM->loginData.email.charLen] = (char)ch;
+                        windowM->loginData.email.text[windowM->loginData.email.charLen + 1] = '\0'; // Add null terminator at the end of the string
+                        windowM->loginData.email.charLen++;
+                    }
+
+                    ch = GetCharPressed(); // Check next character in the queue
+                }
+
+                if (IsKeyPressed(KEY_BACKSPACE))
+                {
+                    windowM->loginData.email.charLen--;
+                    if (windowM->loginData.email.charLen < 0)
+                        windowM->loginData.email.charLen = 0;
+                    windowM->loginData.email.text[windowM->loginData.email.charLen] = '\0';
+                }
+                break;
+            case 1:
+                ch = GetCharPressed();
+                while (ch > 0)
+                {
+                    if ((ch >= 32) && (ch <= 125) && (windowM->loginData.password.charLen < 100))
+                    {
+                        windowM->loginData.password.text[windowM->loginData.password.charLen] = (char)ch;
+                        windowM->loginData.password.text[windowM->loginData.password.charLen + 1] = '\0'; // Add null terminator at the end of the string
+                        windowM->loginData.password.charLen++;
+                    }
+
+                    ch = GetCharPressed(); // Check next character in the queue
+                }
+
+                if (IsKeyPressed(KEY_BACKSPACE))
+                {
+                    windowM->loginData.password.charLen--;
+                    if (windowM->loginData.password.charLen < 0)
+                        windowM->loginData.password.charLen = 0;
+                    windowM->loginData.password.text[windowM->loginData.password.charLen] = '\0';
+                }
+                break;
+            default:
+                break;
+            }
+            break;
+        }
     }
 }

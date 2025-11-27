@@ -10,7 +10,7 @@
 #include "../components/header.h"
 #include "homeView.h"
 #include "../constants/color.h"
-// #include "loginView.h"
+#include "loginView.h"
 
 void drawRootView(windowModel *windowM);
 

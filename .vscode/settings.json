@@ -23,6 +23,7 @@
         "sqltypes.h": "c",
         "raylib.h": "c",
         "windows.h": "c",
-        "window.h": "c"
+        "window.h": "c",
+        "typeinfo": "c"
     }
 }

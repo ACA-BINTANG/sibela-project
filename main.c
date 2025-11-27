@@ -26,20 +26,21 @@ int main()
         .shouldClose = 0,
         .curPos = 0,
         .dbConn = &dbConn,
-    };
+        .loginData = {.email = {.charLen = 0, .text = "\0"}, .activeInput = 0}};
     defaultWindow.font = &poppins;
 
     // findAllStaff(&defaultWindow.datas, defaultWindow.dbConn);
+    SetTargetFPS(120);
 
     while (!WindowShouldClose() && !defaultWindow.shouldClose)
     {
+        updateView(&defaultWindow);
         BeginDrawing();
         drawRootView(&defaultWindow);
-        updateView(&defaultWindow);
         EndDrawing();
     }
 
-    disconnectDb(&dbConn);
+    // disconnectDb(&dbConn);
     UnloadFont(poppins);
     // free(staffPtr);
     CloseWindow();
