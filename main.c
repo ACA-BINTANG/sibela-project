@@ -15,10 +15,10 @@ int main()
 
     Font poppins = LoadFontEx("assets/fonts/Poppins-Medium.ttf", 120, 0, 250);
 
-    initDatabases();
+    // initDatabases();
     SQLHDBC dbConn;
     // SQLHENV dbEnv;
-    initSQLConn(&dbConn);
+    // initSQLConn(&dbConn);
     // Staf *staffPtr = (Staf *)malloc(sizeof(Staf) * 100);
     // data datas = {.staffs = staffPtr};
     windowModel defaultWindow = (windowModel){
@@ -29,7 +29,7 @@ int main()
     };
     defaultWindow.font = &poppins;
 
-    findAllStaff(&defaultWindow.datas, defaultWindow.dbConn);
+    // findAllStaff(&defaultWindow.datas, defaultWindow.dbConn);
 
     while (!WindowShouldClose() && !defaultWindow.shouldClose)
     {

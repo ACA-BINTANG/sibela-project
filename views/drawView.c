@@ -2,6 +2,7 @@
 
 void drawRootView(windowModel *windowM)
 {
+    ClearBackground(TERTIARY);
     switch (windowM->currWindow)
     {
     case HOME:
