@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 #include <unistd.h>
-#include <curses.h>
+// #include "../libs/headers/raylib.h"
 #include "../types/dbTypes.h"
 #include "../model/model.h"
 #include "../libs/utils.h"

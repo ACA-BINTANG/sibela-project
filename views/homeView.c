@@ -1,21 +1,51 @@
 #include "homeView.h"
 
-void drawHome(windowModel *window)
+void drawHome(windowModel *windowM)
 {
-    char options[2][50] = {"info", "Login"};
+    int cell_width = 200;
+    int cell_height = 50;
+    int start_x = 1920 / 2 - 400;
+    int start_y = 1080 / 2 - 300;
+    int padding = 5;
+    int font_size = 45;
 
-    WINDOW *menus = newwin(5, 15, LINES - 10, COLS / 2 - 7);
-    wborder(menus, '|', '|', '-', '-', '+', '+', '+', '+');
-
-    for (int i = 0; i < sizeof(options) / sizeof(options[0]); i++)
+    for (int row = 0; row < 2; row++)
     {
-        if (window->curPos == i)
+        for (int col = 0; col < 10; col++)
         {
-            wattron(menus, COLOR_PAIR(2));
+            Rectangle cellRect = {
+                start_x + col * cell_width,
+                start_y + row * cell_height,
+                cell_width,
+                cell_height};
+            DrawRectangleLinesEx(cellRect, 1, WHITE); // Draw cell border
         }
-        mvwprintw(menus, i + 1, 2, options[i]);
-        wattroff(menus, COLOR_PAIR(2));
+        // DrawTextEx(*windowM->font, windowM->datas.staffs[row].id_num,
+        //            (Vector2){start_x + 1 * cell_width + padding,
+        //                      start_y + row * cell_height + padding},
+        //            font_size, 0,
+        //            WHITE);
+        DrawTextEx(*windowM->font, windowM->datas.staffs[row].id_staff,
+                   (Vector2){start_x + 1 * cell_width + padding,
+                             start_y + row * cell_height + padding},
+                   font_size, 0,
+                   WHITE);
+        DrawTextEx(*windowM->font, windowM->datas.staffs[row].role,
+                   (Vector2){start_x + 2 * cell_width + padding,
+                             start_y + row * cell_height + padding},
+                   font_size, 0,
+                   WHITE);
+        DrawTextEx(*windowM->font, windowM->datas.staffs[row].nama,
+                   (Vector2){start_x + 3 * cell_width + padding,
+                             start_y + row * cell_height + padding},
+                   font_size, 0,
+                   WHITE);
+        DrawTextEx(*windowM->font, windowM->datas.staffs[row].no_hp,
+                   (Vector2){start_x + 4 * cell_width + padding,
+                             start_y + row * cell_height + padding},
+                   font_size, 0,
+                   WHITE);
     }
-
-    wrefresh(menus);
+    // DrawTextEx(*windowM->font, "ID\taw\tyes", (Vector2){1920 / 2, 1080 / 2 - 100}, 120, 0, WHITE);
+    ClearBackground((Color){51, 51, 50});
 }

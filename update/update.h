@@ -5,10 +5,10 @@
 #include <stdlib.h>
 
 #include <unistd.h>
-#include <curses.h>
-#include "../model/model.h"
+#include "../libs/headers/raylib.h"
+#include "../model/window.h"
 #include "../libs/utils.h"
 
-void updateView(windowModel *window);
+void updateView(windowModel *windowM);
 
 #endif

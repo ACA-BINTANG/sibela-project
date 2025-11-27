@@ -1,23 +1,18 @@
 #ifndef model
 #define model
 
-#include <stdio.h>
-#include <curses.h>
-
-typedef enum
-{
-    HOME,
-    LOGIN,
-    ADMINSTUDENT
-} WINDOWS;
-
+typedef void *SQLHANDLE;
+typedef SQLHANDLE SQLHDBC;
+typedef short SQLSMALLINT;
+#include "../types/dbTypes.h"
 typedef struct
 {
-    WINDOWS currWindow;
-    int shouldClose;
-    int curPos;
-} windowModel;
+    Staf staffs[100];
+    SQLSMALLINT nStaf;
+} data;
 
-windowModel initWindow(void);
+void readDBDsn(char target[]);
+void initSQLConn(SQLHDBC *dbConn);
+void disconnectDb(SQLHDBC *dbConn);
 
 #endif

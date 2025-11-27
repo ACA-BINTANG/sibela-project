@@ -6,10 +6,7 @@
 
 #include <unistd.h>
 #include <time.h>
-#include <curses.h>
-#include "../model/model.h"
-#include "../libs/utils.h"
-#include "../components/header.h"
+// #include "../model/model.h"
 
 typedef enum
 {
@@ -36,15 +33,29 @@ typedef struct
 
 typedef struct
 {
-    char id[30];
-    char nama[50];
+    int id_num;
+    char id_staff[30];
+    char role[20];
+    char nama[255];
     time_t tanggal_lahir;
-    staf_role_enum role;
-    char email[100];
-    char password[100];
+    int tingkat;
     time_t tanggal_masuk;
     char no_hp[20];
-    char alamat[150];
+    char password[100];
+    char email[100];
 } Staf;
+
+// typedef struct
+//     {
+//         SQLINTEGER id_num;
+//         SQLVARCHAR id_staff;
+//         SQLVARCHAR role;
+//         SQLVARCHAR nama;
+//         SQLDATE tanggal_lahir;
+//         SQLINTEGER tingat;
+//         SQLDATE tanggal_masuk;
+//         SQLVARCHAR no_hp;
+//         SQLVARCHAR password;
+//     } stafSQL;
 
 #endif

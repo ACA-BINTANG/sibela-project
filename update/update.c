@@ -1,35 +1,35 @@
 #include "update.h"
 
-void updateView(windowModel *window)
+void updateView(windowModel *windowM)
 {
-    int ch = getch();
+    int ch = GetKeyPressed();
     switch (ch)
     {
-    case 'q':
-        window->shouldClose = 1;
+    case KEY_Q:
+        windowM->shouldClose = 1;
         break;
     }
-    switch (window->currWindow)
+    switch (windowM->currWindow)
     {
     case HOME:
         switch (ch)
         {
-        case 'w':
+        case KEY_W:
         case KEY_UP:
-            window->curPos -= 1;
+            windowM->curPos -= 1;
             break;
-        case 's':
+        case KEY_S:
         case KEY_DOWN:
-            window->curPos += 1;
+            windowM->curPos += 1;
             break;
-        case '2':
-            window->currWindow = ADMINSTUDENT;
+        case KEY_KP_2:
+            windowM->currWindow = ADMINSTUDENT;
             break;
 
-        case ' ':
-        case '\n':
-            window->currWindow = window->curPos;
-            window->curPos = 0;
+        case KEY_SPACE:
+        case KEY_ENTER:
+            windowM->currWindow = windowM->curPos;
+            windowM->curPos = 0;
             break;
         }
         break;

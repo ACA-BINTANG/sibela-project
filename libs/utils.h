@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 #include <unistd.h>
-#include <curses.h>
 #include <string.h>
 #include <time.h>
 
@@ -16,5 +15,6 @@ void clrScr(void);
 void readAndDrawAscii(char name[], int x, int y);
 time_t parseDate(char strDate[]);
 void parseID(char prefix[], int lastIdx, char (*outputID)[]);
+// void readDBDsn(char target[]);
 
 #endif

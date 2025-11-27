@@ -2,8 +2,8 @@
 
 void drawHeader()
 {
-    int line = 2;
-    int cols = COLS / 2;
+    // int line = 2;
+    // int cols = COLS / 2;
 
-    readAndDrawAscii("logo.txt", cols, line);
+    // readAndDrawAscii("logo.txt", cols, line);
 }

@@ -1,12 +1,12 @@
 #include "drawView.h"
 
-void drawRootView(windowModel *window)
+void drawRootView(windowModel *windowM)
 {
-    switch (window->currWindow)
+    switch (windowM->currWindow)
     {
     case HOME:
         drawHeader();
-        drawHome(window);
+        drawHome(windowM);
         break;
     case LOGIN:
         drawHeader();

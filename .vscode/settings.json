@@ -15,6 +15,14 @@
         "curses.h": "c",
         "drawview.h": "c",
         "loginview.h": "c",
-        "homeview.h": "c"
+        "homeview.h": "c",
+        "basetsd.h": "c",
+        "_mingw.h": "c",
+        "sqlext.h": "c",
+        "sql.h": "c",
+        "sqltypes.h": "c",
+        "raylib.h": "c",
+        "windows.h": "c",
+        "window.h": "c"
     }
 }

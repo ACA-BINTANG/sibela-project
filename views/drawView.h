@@ -5,12 +5,12 @@
 #include <stdlib.h>
 
 #include <unistd.h>
-#include "../model/model.h"
+#include "../model/window.h"
 #include "../libs/utils.h"
 #include "../components/header.h"
 #include "homeView.h"
 // #include "loginView.h"
 
-void drawRootView(windowModel *window);
+void drawRootView(windowModel *windowM);
 
 #endif
