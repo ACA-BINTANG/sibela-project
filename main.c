@@ -13,21 +13,25 @@ int main()
 
     SetConfigFlags(FLAG_FULLSCREEN_MODE);
 
-    Font poppins = LoadFontEx("assets/fonts/Poppins-Medium.ttf", 120, 0, 250);
+    Font poppinsMedium = LoadFontEx("assets/fonts/Poppins-Medium.ttf", 200, 0, 250);
+    Font poppinsRegular = LoadFontEx("assets/fonts/Poppins-Regular.ttf", 200, 0, 250);
+    Font poppinsMediumItalic = LoadFontEx("assets/fonts/Poppins-MediumItalic.ttf", 200, 0, 250);
 
     // initDatabases();
     SQLHDBC dbConn;
     // SQLHENV dbEnv;
-    // initSQLConn(&dbConn);
+    initSQLConn(&dbConn);
     // Staf *staffPtr = (Staf *)malloc(sizeof(Staf) * 100);
     // data datas = {.staffs = staffPtr};
     windowModel defaultWindow = (windowModel){
-        .currWindow = HOME,
+        .currWindow = LOGIN,
         .shouldClose = 0,
         .curPos = 0,
         .dbConn = &dbConn,
         .loginData = {.email = {.charLen = 0, .text = "\0"}, .activeInput = 0}};
-    defaultWindow.font = &poppins;
+    defaultWindow.fontStyle.medium = &poppinsMedium;
+    defaultWindow.fontStyle.regular = &poppinsRegular;
+    defaultWindow.fontStyle.mediumItalic = &poppinsMediumItalic;
 
     // findAllStaff(&defaultWindow.datas, defaultWindow.dbConn);
     SetTargetFPS(120);
@@ -40,8 +44,10 @@ int main()
         EndDrawing();
     }
 
-    // disconnectDb(&dbConn);
-    UnloadFont(poppins);
+    disconnectDb(&dbConn);
+    UnloadFont(poppinsMedium);
+    UnloadFont(poppinsRegular);
+    UnloadFont(poppinsMediumItalic);
     // free(staffPtr);
     CloseWindow();
 

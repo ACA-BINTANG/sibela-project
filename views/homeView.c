@@ -23,10 +23,13 @@ void drawHome(windowModel *windowM)
 
     // DrawTextEx(*windowM->font, "ID\taw\tyes", (Vector2){1920 / 2, 1080 / 2 - 100}, 120, 0, WHITE);
     DrawRectangle(0, 0, 300, 1080, SECONDARY);
+    DrawTextEx(*windowM->fontStyle.mediumItalic, "SIBELA", (Vector2){50, 64}, 80, 0, SIBELAWHITE);
+
     for (int i = 0; i < sizeof(opsi) / sizeof(opsi[0]); i++)
     {
         if (i == windowM->curPos)
-            DrawRectangleRounded((Rectangle){.x = startX - 8, .y = startY + i * gap - 7, .width = MeasureTextEx(*windowM->font, opsi[i].nama, 32, 0).x + 20, .height = 44}, 0.2, 0, SIBELAWHITE);
-        DrawTextEx(*windowM->font, opsi[i].nama, (Vector2){startX, startY + i * gap}, 32, 0, i == windowM->curPos ? SECONDARY : SIBELAWHITE);
+            DrawRectangleRounded((Rectangle){.x = startX - 8, .y = startY + i * gap - 7, .width = MeasureTextEx(*windowM->fontStyle.medium, opsi[i].nama, 32, 0).x + 20, .height = 44}, 0.2, 0, SIBELAWHITE);
+        DrawTextEx(*windowM->fontStyle.medium, opsi[i].nama, (Vector2){startX, startY + i * gap}, 32, 0, i == windowM->curPos ? SECONDARY : SIBELAWHITE);
     }
+    DrawTextEx(*windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), (Vector2){1920 / 2, 300}, 40, 0, SIBELAWHITE);
 }

@@ -22,23 +22,58 @@
 //     fclose(stafDb);
 // }
 
-Staf findStafbyEmail(char email[])
+Staf findStafbyEmail(char email[], SQLHDBC *dbConn)
 {
-    FILE *stafDb = fopen(STAFPATH, "rb");
-    Staf res;
     Staf foundRecord;
+    SQLHSTMT stmt;
+    SQLRETURN ret;
+    char dateBuff[50];
+    SQLUSMALLINT rowStatus[100];
+    printf("Finding staf\n");
+    SQLAllocHandle(SQL_HANDLE_STMT, *dbConn, &stmt);
+    SQLPrepare(stmt, (SQLCHAR *)"SELECT * FROM staff WHERE email = ?", SQL_NTS);
+    SQLBindParameter(stmt, 1, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(email), 0, email, 0, NULL);
+    ret = SQLExecute(stmt);
 
-    while (fread(&foundRecord, sizeof(Staf), 1, stafDb) == 1)
+    if (SQL_SUCCEEDED(ret))
     {
-        if (strcmp(foundRecord.email, email) == 0)
+        ret = SQLFetch(stmt);
+
+        switch (ret)
         {
-            res = foundRecord;
+        case SQL_NO_DATA:
+            foundRecord.id_num = -1;
+            break;
+
+        default:
+            SQLGetData(stmt, 1, SQL_C_LONG,
+                       &foundRecord.id_num, sizeof(foundRecord.id_num), NULL);
+            SQLGetData(stmt, 2, SQL_C_CHAR,
+                       &foundRecord.id_staff, sizeof(foundRecord.id_staff), NULL);
+            SQLGetData(stmt, 3, SQL_C_CHAR,
+                       &foundRecord.role, sizeof(foundRecord.role), NULL);
+            SQLGetData(stmt, 4, SQL_C_CHAR,
+                       &foundRecord.nama, sizeof(foundRecord.nama), NULL);
+            SQLGetData(stmt, 5, SQL_C_CHAR,
+                       dateBuff, sizeof(dateBuff), NULL);
+            foundRecord.tanggal_lahir = parseDate(dateBuff);
+            SQLGetData(stmt, 6, SQL_C_LONG,
+                       &foundRecord.tingkat, sizeof(foundRecord.tingkat), NULL);
+            SQLGetData(stmt, 7, SQL_C_CHAR,
+                       dateBuff, sizeof(dateBuff), NULL);
+            foundRecord.tanggal_masuk = parseDate(dateBuff);
+            SQLGetData(stmt, 8, SQL_C_CHAR,
+                       &foundRecord.no_hp, sizeof(foundRecord.no_hp), NULL);
+            SQLGetData(stmt, 9, SQL_C_CHAR,
+                       &foundRecord.password, sizeof(foundRecord.password), NULL);
+            SQLGetData(stmt, 10, SQL_C_CHAR,
+                       &foundRecord.email, sizeof(foundRecord.email), NULL);
             break;
         }
     }
+    SQLFreeHandle(SQL_HANDLE_STMT, *dbConn);
 
-    fclose(stafDb);
-    return res;
+    return foundRecord;
 }
 
 void findAllStaff(data *datas, SQLHDBC *dbConn)

@@ -27,12 +27,27 @@ typedef struct
 
 typedef struct
 {
+    Font *regular;
+    Font *medium;
+    Font *mediumItalic;
+} FontStyles;
+
+typedef struct
+{
+    char id[20];
+    char nama[100];
+    char role[20];
+} user;
+
+typedef struct
+{
     WINDOWS currWindow;
     int shouldClose;
     int curPos;
     SQLHDBC *dbConn;
-    Font *font;
+    FontStyles fontStyle;
     data datas;
+    user authUser;
     LoginScreen loginData;
 } windowModel;
 

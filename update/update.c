@@ -8,6 +8,9 @@ void updateView(windowModel *windowM)
     case KEY_ESCAPE:
         windowM->shouldClose = 1;
         break;
+    case KEY_F2:
+        windowM->currWindow = HOME;
+        break;
     }
     switch (windowM->currWindow)
     {
@@ -21,9 +24,6 @@ void updateView(windowModel *windowM)
         case KEY_S:
         case KEY_DOWN:
             windowM->curPos += 1;
-            break;
-        case KEY_F2:
-            windowM->currWindow = LOGIN;
             break;
 
         case KEY_SPACE:
@@ -91,6 +91,14 @@ void updateView(windowModel *windowM)
                     if (windowM->loginData.password.charLen < 0)
                         windowM->loginData.password.charLen = 0;
                     windowM->loginData.password.text[windowM->loginData.password.charLen] = '\0';
+                }
+                break;
+            case 2:
+                switch (ch)
+                {
+                case KEY_ENTER:
+                    loginFunction(windowM);
+                    break;
                 }
                 break;
             default:

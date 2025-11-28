@@ -10,6 +10,7 @@ find_package(ODBC REQUIRED)
 set(PACKAGES
 components/header.c
 libs/utils.c
+libs/login.c
 model/model.c
 update/update.c
 views/drawView.c

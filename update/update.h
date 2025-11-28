@@ -8,6 +8,7 @@
 #include "../libs/headers/raylib.h"
 #include "../model/window.h"
 #include "../libs/utils.h"
+#include "../libs/login.h"
 
 void updateView(windowModel *windowM);
 
