@@ -5,10 +5,13 @@ typedef void *SQLHANDLE;
 typedef SQLHANDLE SQLHDBC;
 typedef short SQLSMALLINT;
 #include "../types/dbTypes.h"
+
 typedef struct
 {
     Staf staffs[100];
     SQLSMALLINT nStaf;
+    int page;
+    int totalPages;
 } data;
 
 void readDBDsn(char target[]);

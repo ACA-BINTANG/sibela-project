@@ -24,6 +24,7 @@
         "raylib.h": "c",
         "windows.h": "c",
         "window.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "landingview.h": "c"
     }
 }

@@ -12,27 +12,38 @@ int main()
     InitWindow(1920, 1080, "Sibela");
 
     SetConfigFlags(FLAG_FULLSCREEN_MODE);
+    SetConfigFlags(FLAG_MSAA_4X_HINT);
 
-    Font poppinsMedium = LoadFontEx("assets/fonts/Poppins-Medium.ttf", 200, 0, 250);
-    Font poppinsRegular = LoadFontEx("assets/fonts/Poppins-Regular.ttf", 200, 0, 250);
-    Font poppinsMediumItalic = LoadFontEx("assets/fonts/Poppins-MediumItalic.ttf", 200, 0, 250);
+    ToggleFullscreen();
 
-    // initDatabases();
+    Font poppinsMedium = LoadFontEx("assets/fonts/Poppins-Medium.ttf", 224, 0, 250);
+    Font poppinsRegular = LoadFontEx("assets/fonts/Poppins-Regular.ttf", 224, 0, 250);
+    Font poppinsMediumItalic = LoadFontEx("assets/fonts/Poppins-MediumItalic.ttf", 224, 0, 250);
+
     SQLHDBC dbConn;
-    // SQLHENV dbEnv;
     initSQLConn(&dbConn);
-    // Staf *staffPtr = (Staf *)malloc(sizeof(Staf) * 100);
-    // data datas = {.staffs = staffPtr};
     windowModel defaultWindow = (windowModel){
-        .currWindow = LOGIN,
+        .currWindow = LANDINGPAGE,
         .shouldClose = 0,
         .curPos = 0,
+        .page = 1,
+        .cursorEnabled = 1,
+        .selectedPage = -1,
         .dbConn = &dbConn,
         .loginData = {.email = {.charLen = 0, .text = "\0"}, .activeInput = 0}};
     defaultWindow.fontStyle.medium = &poppinsMedium;
     defaultWindow.fontStyle.regular = &poppinsRegular;
     defaultWindow.fontStyle.mediumItalic = &poppinsMediumItalic;
+    defaultWindow.datas.page = 1;
+    defaultWindow.members[0].image = LoadTexture("assets/images/member/rayyan.png");
+    defaultWindow.members[1].image = LoadTexture("assets/images/member/rasya.png");
+    defaultWindow.members[2].image = LoadTexture("assets/images/member/bayu.png");
+    defaultWindow.members[3].image = LoadTexture("assets/images/member/rijal.png");
+    defaultWindow.members[4].image = LoadTexture("assets/images/member/nabilah.png");
+    defaultWindow.dataFetchers.admin[0] = findAllStaff;
 
+    readAscii("logo.txt", defaultWindow.asciis.logo);
+    defaultWindow.images.logo = LoadTexture("assets/images/logo_sibela.png");
     // findAllStaff(&defaultWindow.datas, defaultWindow.dbConn);
     SetTargetFPS(120);
 
@@ -48,7 +59,12 @@ int main()
     UnloadFont(poppinsMedium);
     UnloadFont(poppinsRegular);
     UnloadFont(poppinsMediumItalic);
-    // free(staffPtr);
+    UnloadTexture(defaultWindow.images.logo);
+    UnloadTexture(defaultWindow.members[0].image);
+    UnloadTexture(defaultWindow.members[1].image);
+    UnloadTexture(defaultWindow.members[2].image);
+    UnloadTexture(defaultWindow.members[3].image);
+    UnloadTexture(defaultWindow.members[4].image);
     CloseWindow();
 
     return 0;

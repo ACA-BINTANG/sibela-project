@@ -8,23 +8,22 @@ void drawLogin(windowModel *windowM)
 
     Rectangle textBox = {
         screenWidth / 2.0f - 300,
-        180,
+        screenHeight - 400,
         600,
         63,
     };
     Rectangle textBoxPass = {
         screenWidth / 2.0f - 300,
-        180 + 63 + 80,
+        screenHeight - 400 + 63 + 80,
         600,
         63,
     };
     Rectangle buttonBox = {
         screenWidth / 2.0f - 80,
-        180 + 63 + 180,
+        screenHeight - 400 + 63 + 180,
         160,
         67,
     };
-
     DrawTextEx(*windowM->fontStyle.medium, "Email", (Vector2){(int)textBox.x, (int)textBox.y - 44}, 40, 0, SIBELAWHITE);
     DrawRectangleRoundedLines(textBox, 0.3, 0, windowM->loginData.activeInput == 0 ? PRIMARY : SIBELAWHITE);
     DrawTextEx(*windowM->fontStyle.regular, windowM->loginData.email.text, (Vector2){(int)textBox.x + 5, (int)textBox.y + 8}, 40, 0, SIBELAWHITE);

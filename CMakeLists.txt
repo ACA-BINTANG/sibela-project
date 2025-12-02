@@ -8,14 +8,16 @@ project(sibela)
 
 find_package(ODBC REQUIRED)
 set(PACKAGES
-components/header.c
 libs/utils.c
+components/header.c
 libs/login.c
 model/model.c
 update/update.c
 views/drawView.c
 views/homeView.c
 views/loginView.c
+views/landingView.c
+views/memberView.c
 data/initDb.c
 data/staf.c
 components/header.c

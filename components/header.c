@@ -1,9 +1,6 @@
 #include "header.h"
 
-void drawHeader()
+void drawHeader(windowModel *windowM)
 {
-    // int line = 2;
-    // int cols = COLS / 2;
-
-    // readAndDrawAscii("logo.txt", cols, line);
+    DrawTextureEx(windowM->images.logo, (Vector2){1920 / 2 - windowM->images.logo.width * 0.7f / 2, 100}, 0, 0.7, SIBELAWHITE);
 }

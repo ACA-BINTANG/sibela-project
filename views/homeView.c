@@ -1,11 +1,5 @@
 #include "homeView.h"
 
-typedef struct
-{
-    char nama[50];
-    int selected;
-} Menus;
-
 void drawHome(windowModel *windowM)
 {
     Menus opsi[] = {
@@ -20,16 +14,100 @@ void drawHome(windowModel *windowM)
     int gap = 50;
     int startX = 35;
     int startY = 375;
-
-    // DrawTextEx(*windowM->font, "ID\taw\tyes", (Vector2){1920 / 2, 1080 / 2 - 100}, 120, 0, WHITE);
     DrawRectangle(0, 0, 300, 1080, SECONDARY);
     DrawTextEx(*windowM->fontStyle.mediumItalic, "SIBELA", (Vector2){50, 64}, 80, 0, SIBELAWHITE);
 
     for (int i = 0; i < sizeof(opsi) / sizeof(opsi[0]); i++)
     {
-        if (i == windowM->curPos)
+        if ((i == windowM->curPos && windowM->cursorEnabled) || (i == windowM->selectedPage && !windowM->cursorEnabled))
             DrawRectangleRounded((Rectangle){.x = startX - 8, .y = startY + i * gap - 7, .width = MeasureTextEx(*windowM->fontStyle.medium, opsi[i].nama, 32, 0).x + 20, .height = 44}, 0.2, 0, SIBELAWHITE);
-        DrawTextEx(*windowM->fontStyle.medium, opsi[i].nama, (Vector2){startX, startY + i * gap}, 32, 0, i == windowM->curPos ? SECONDARY : SIBELAWHITE);
+        DrawTextEx(*windowM->fontStyle.medium, opsi[i].nama, (Vector2){startX, startY + i * gap}, 32, 0, (i == windowM->curPos && windowM->cursorEnabled) || (i == windowM->selectedPage && !windowM->cursorEnabled) ? SECONDARY : SIBELAWHITE);
     }
-    DrawTextEx(*windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), (Vector2){1920 / 2, 300}, 40, 0, SIBELAWHITE);
+
+    switch (windowM->selectedPage)
+    {
+    case 0:
+        int cell_width = 200;
+        int cell_height = 50;
+        int start_x = 1920 / 2 - 600 + 300;
+        int start_y = 1080 / 2 - 300;
+        int padding = 5;
+        int font_size = 32;
+
+        DrawTextEx(*windowM->fontStyle.regular, "DATA STAFF",
+                   (Vector2){start_x + 320,
+                             start_y - 120},
+                   64, 0,
+                   SIBELAWHITE);
+        for (int col = 0; col < 4; col++)
+        {
+            Rectangle cellRect = {
+                start_x + col * cell_width,
+                start_y - cell_height,
+                cell_width,
+                cell_height};
+            DrawRectangleLinesEx(cellRect, 1, SIBELAWHITE);
+            DrawRectangleLinesEx(cellRect, 1, SIBELAWHITE);
+            DrawTextEx(*windowM->fontStyle.regular, "id",
+                       (Vector2){start_x + 0 * cell_width + padding,
+                                 start_y - cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+            DrawTextEx(*windowM->fontStyle.regular, "Role",
+                       (Vector2){start_x + 1 * cell_width + padding,
+                                 start_y - cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+            DrawTextEx(*windowM->fontStyle.regular, "Nama",
+                       (Vector2){start_x + 2 * cell_width + padding,
+                                 start_y - cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+            DrawTextEx(*windowM->fontStyle.regular, "No. Hp",
+                       (Vector2){start_x + 3 * cell_width + padding,
+                                 start_y - cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+        }
+        for (int row = 0; row < windowM->datas.nStaf; row++)
+        {
+            for (int col = 0; col < 4; col++)
+            {
+                Rectangle cellRect = {
+                    start_x + col * cell_width,
+                    start_y + row * cell_height,
+                    cell_width,
+                    cell_height};
+                if (row == windowM->curPos)
+                {
+                    DrawRectangleRec(cellRect, PRIMARY);
+                }
+                DrawRectangleLinesEx(cellRect, 1, SIBELAWHITE);
+            }
+            DrawTextEx(*windowM->fontStyle.regular, windowM->datas.staffs[row].id_staff,
+                       (Vector2){start_x + 0 * cell_width + padding,
+                                 start_y + row * cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+            DrawTextEx(*windowM->fontStyle.regular, windowM->datas.staffs[row].role,
+                       (Vector2){start_x + 1 * cell_width + padding,
+                                 start_y + row * cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+            DrawTextEx(*windowM->fontStyle.regular, windowM->datas.staffs[row].nama,
+                       (Vector2){start_x + 2 * cell_width + padding,
+                                 start_y + row * cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+            DrawTextEx(*windowM->fontStyle.regular, windowM->datas.staffs[row].no_hp,
+                       (Vector2){start_x + 3 * cell_width + padding,
+                                 start_y + row * cell_height + padding},
+                       font_size, 0,
+                       SIBELAWHITE);
+        }
+        break;
+    default:
+        DrawTextEx(*windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), (Vector2){1920 / 2, 300}, 40, 0, SIBELAWHITE);
+        break;
+    }
 }

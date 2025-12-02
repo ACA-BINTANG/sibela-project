@@ -15,6 +15,6 @@
 // void createStaf(int lastIndex);
 Staf findStafbyEmail(char email[], SQLHDBC *dbConn);
 
-void findAllStaff(data *datas, SQLHDBC *dbConn);
+void findAllStaff(data *datas, int *nPage, SQLHDBC *dbConn);
 
 #endif

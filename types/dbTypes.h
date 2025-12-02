@@ -38,7 +38,6 @@ typedef struct
     char role[20];
     char nama[255];
     time_t tanggal_lahir;
-    int tingkat;
     time_t tanggal_masuk;
     char no_hp[20];
     char password[100];

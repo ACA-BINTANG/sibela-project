@@ -12,7 +12,7 @@ void gotoXy(int x, int y);
 void clrScr(void);
 // int getMaxX(void);
 // int getMaxY(void);
-void readAndDrawAscii(char name[], int x, int y);
+void readAscii(char name[], char dest[]);
 time_t parseDate(char strDate[]);
 void parseID(char prefix[], int lastIdx, char (*outputID)[]);
 // void readDBDsn(char target[]);

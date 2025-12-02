@@ -5,6 +5,7 @@
 #include <sqltypes.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 // void createStaf(int lastIndex)
 // {
@@ -29,8 +30,10 @@ Staf findStafbyEmail(char email[], SQLHDBC *dbConn)
     SQLRETURN ret;
     char dateBuff[50];
     SQLUSMALLINT rowStatus[100];
+
     printf("Finding staf\n");
     SQLAllocHandle(SQL_HANDLE_STMT, *dbConn, &stmt);
+
     SQLPrepare(stmt, (SQLCHAR *)"SELECT * FROM staff WHERE email = ?", SQL_NTS);
     SQLBindParameter(stmt, 1, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(email), 0, email, 0, NULL);
     ret = SQLExecute(stmt);
@@ -57,16 +60,14 @@ Staf findStafbyEmail(char email[], SQLHDBC *dbConn)
             SQLGetData(stmt, 5, SQL_C_CHAR,
                        dateBuff, sizeof(dateBuff), NULL);
             foundRecord.tanggal_lahir = parseDate(dateBuff);
-            SQLGetData(stmt, 6, SQL_C_LONG,
-                       &foundRecord.tingkat, sizeof(foundRecord.tingkat), NULL);
-            SQLGetData(stmt, 7, SQL_C_CHAR,
+            SQLGetData(stmt, 6, SQL_C_CHAR,
                        dateBuff, sizeof(dateBuff), NULL);
             foundRecord.tanggal_masuk = parseDate(dateBuff);
-            SQLGetData(stmt, 8, SQL_C_CHAR,
+            SQLGetData(stmt, 7, SQL_C_CHAR,
                        &foundRecord.no_hp, sizeof(foundRecord.no_hp), NULL);
-            SQLGetData(stmt, 9, SQL_C_CHAR,
+            SQLGetData(stmt, 8, SQL_C_CHAR,
                        &foundRecord.password, sizeof(foundRecord.password), NULL);
-            SQLGetData(stmt, 10, SQL_C_CHAR,
+            SQLGetData(stmt, 9, SQL_C_CHAR,
                        &foundRecord.email, sizeof(foundRecord.email), NULL);
             break;
         }
@@ -76,7 +77,7 @@ Staf findStafbyEmail(char email[], SQLHDBC *dbConn)
     return foundRecord;
 }
 
-void findAllStaff(data *datas, SQLHDBC *dbConn)
+void findAllStaff(data *datas, int *nPage, SQLHDBC *dbConn)
 {
 
     if (datas->nStaf > 0)
@@ -84,9 +85,22 @@ void findAllStaff(data *datas, SQLHDBC *dbConn)
 
     SQLHSTMT stmt;
     SQLRETURN ret;
+    int count;
     SQLUSMALLINT rowStatus[100];
 
     SQLLEN rowsFetched = 0;
+    SQLAllocHandle(SQL_HANDLE_STMT, *dbConn, &stmt);
+    ret = SQLExecDirect(stmt, (SQLCHAR *)"SELECT COUNT(*) AS row_count FROM staff", SQL_NTS);
+    if (SQL_SUCCEEDED(ret))
+    {
+        if (SQL_SUCCEEDED(SQLFetch(stmt)))
+        {
+            SQLGetData(stmt, 1, SQL_C_LONG, &count, 0, NULL);
+        }
+    }
+    SQLFreeHandle(SQL_HANDLE_STMT, stmt);
+    *nPage = (int)ceil((float)count / 10);
+    printf("awikwok %d\n", *nPage);
     SQLAllocHandle(SQL_HANDLE_STMT, *dbConn, &stmt);
     ret = SQLExecDirect(stmt, (SQLCHAR *)"SELECT * FROM staff", SQL_NTS);
     while (SQL_SUCCEEDED(ret = SQLFetch(stmt)))
@@ -94,6 +108,7 @@ void findAllStaff(data *datas, SQLHDBC *dbConn)
         printf("Successfully fetched %lld rows\n", rowsFetched);
         char dateBuff[50];
         int i = (int)rowsFetched;
+        printf("awikwok %d\n", i);
 
         SQLGetData(stmt, 1, SQL_C_LONG,
                    &datas->staffs[i].id_num, sizeof(datas->staffs[i].id_num), NULL);
@@ -106,17 +121,16 @@ void findAllStaff(data *datas, SQLHDBC *dbConn)
         SQLGetData(stmt, 5, SQL_C_CHAR,
                    dateBuff, sizeof(dateBuff), NULL);
         datas->staffs[rowsFetched].tanggal_lahir = parseDate(dateBuff);
-        SQLGetData(stmt, 6, SQL_C_LONG,
-                   &datas->staffs[i].tingkat, sizeof(datas->staffs[i].tingkat), NULL);
-        SQLGetData(stmt, 7, SQL_C_CHAR,
+        SQLGetData(stmt, 6, SQL_C_CHAR,
                    dateBuff, sizeof(dateBuff), NULL);
         datas->staffs[rowsFetched].tanggal_masuk = parseDate(dateBuff);
-        SQLGetData(stmt, 8, SQL_C_CHAR,
+        SQLGetData(stmt, 7, SQL_C_CHAR,
                    &datas->staffs[i].no_hp, sizeof(datas->staffs[i].no_hp), NULL);
-        SQLGetData(stmt, 9, SQL_C_CHAR,
+        SQLGetData(stmt, 8, SQL_C_CHAR,
                    &datas->staffs[i].password, sizeof(datas->staffs[i].password), NULL);
-        SQLGetData(stmt, 10, SQL_C_CHAR,
+        SQLGetData(stmt, 9, SQL_C_CHAR,
                    &datas->staffs[i].email, sizeof(datas->staffs[i].email), NULL);
+        printf("staff %d: %s\n", i, datas->staffs[i].nama);
         rowsFetched++;
     }
     datas->nStaf = rowsFetched;

@@ -26,14 +26,21 @@ void updateView(windowModel *windowM)
             windowM->curPos += 1;
             break;
 
+        case KEY_TAB:
+            windowM->cursorEnabled = 1;
+            windowM->selectedPage = -1;
+            windowM->curPos = 0;
+            break;
         case KEY_SPACE:
         case KEY_ENTER:
-            windowM->currWindow = windowM->curPos;
+            windowM->dataFetchers.admin[windowM->curPos](&windowM->datas, &windowM->datas.totalPages, windowM->dbConn);
+            windowM->selectedPage = windowM->curPos;
             windowM->curPos = 0;
+            windowM->cursorEnabled = 0;
             break;
         }
         break;
-    case LOGIN:
+    case LOGINSTAFF:
         switch (ch)
         {
         case KEY_TAB:
@@ -106,5 +113,32 @@ void updateView(windowModel *windowM)
             }
             break;
         }
+    case LANDINGPAGE:
+        switch (ch)
+        {
+        case KEY_UP:
+            windowM->curPos -= 1;
+            break;
+        case KEY_DOWN:
+            windowM->curPos += 1;
+            break;
+        case KEY_ENTER:
+            windowM->currWindow = windowM->navigation.landingPage[windowM->curPos].targetPage;
+            windowM->curPos = 0;
+            break;
+        }
+    case CONTRIBPAGE:
+        switch (ch)
+        {
+        case KEY_LEFT:
+            if (windowM->page > 1)
+                windowM->page--;
+            break;
+        case KEY_RIGHT:
+            if (windowM->page < 5)
+                windowM->page++;
+            break;
+        }
+        break;
     }
 }

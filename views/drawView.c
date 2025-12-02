@@ -6,14 +6,22 @@ void drawRootView(windowModel *windowM)
     switch (windowM->currWindow)
     {
     case HOME:
-        drawHeader();
+        // drawHeader();
         drawHome(windowM);
         break;
-    case LOGIN:
-        // drawHeader();
+    case LOGINSTAFF:
+        drawHeader(windowM);
         drawLogin(windowM);
         break;
     case ADMINSTUDENT:
+        break;
+    case LANDINGPAGE:
+        drawHeader(windowM);
+        drawLandingPage(windowM);
+        break;
+
+    case CONTRIBPAGE:
+        drawMemberPage(windowM);
         break;
     }
 }
