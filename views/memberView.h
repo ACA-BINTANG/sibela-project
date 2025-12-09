@@ -14,4 +14,6 @@
 
 void drawMemberPage(windowModel *windowM);
 
+// waw komen ini berguna
+
 #endif
