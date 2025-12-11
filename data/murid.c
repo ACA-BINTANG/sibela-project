@@ -115,7 +115,7 @@ void findAllMurid(dataMurid *datas, int *nPage, SQLHDBC *dbConn)
     SQLFreeHandle(SQL_HANDLE_STMT, *dbConn);
 }
 
-QUERYSTATUS createStaff(dataMurid *datas, int *nPage, SQLHDBC *dbConn, Murid newMurid)
+QUERYSTATUS createMurid(dataMurid *datas, int *nPage, SQLHDBC *dbConn, Murid newMurid)
 {
     SQLHSTMT stmt;
     SQLRETURN ret;
