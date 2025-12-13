@@ -4,13 +4,13 @@
 #include "update/update.h"
 #include "views/drawView.h"
 #include "data/staf.h"
+#include "views/Loading.h"
 
 int main()
 {
-    InitWindow(1920, 1080, "Sibela");
-
     SetConfigFlags(FLAG_FULLSCREEN_MODE);
     SetConfigFlags(FLAG_MSAA_4X_HINT);
+    InitWindow(1920, 1080, "Sibela");
 
     ToggleFullscreen();
 
@@ -45,6 +45,10 @@ int main()
     defaultWindow.images.logo = LoadTexture("assets/images/sibela_Versi2.png");
     // Logo Robot Sibela
     defaultWindow.images.logoRobot = LoadTexture("assets/images/Robot_Sibela.png");
+
+    defaultWindow.isLoading = true;
+    defaultWindow.loadingTime = 0.0f;
+
 
     // findAllStaff(&defaultWindow.datas, defaultWindow.dbConn);
     SetTargetFPS(120);

@@ -2,6 +2,20 @@
 
 void updateView(windowModel *windowM)
 {
+    if (windowM->isLoading) {
+    windowM->loadingTime += GetFrameTime();
+    float progress = windowM->loadingTime / 2.0f;   
+
+    if (progress > 1.0f) progress = 1.0f;
+    windowM->progress = progress;
+
+    if (windowM->loadingTime >= 2.0f) {
+        windowM->isLoading = false;
+        windowM->currWindow = LANDINGPAGE;
+    }
+
+    return; 
+}
     int ch = GetKeyPressed();
     switch (ch)
     {

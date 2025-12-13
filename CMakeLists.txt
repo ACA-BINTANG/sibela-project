@@ -14,6 +14,7 @@ views/homeView.c
 views/loginView.c
 views/landingView.c
 views/memberView.c
+views/Loading.c
 data/initDb.c
 data/staf.c
 data/murid.c
