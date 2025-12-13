@@ -108,6 +108,9 @@ typedef struct
     user authUser;
     fetcher dataFetchers;
     LoginScreen loginData;
+    bool isLoading;
+    float loadingTime;
+    float progress;
 } windowModel;
 
 #endif
