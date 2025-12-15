@@ -93,7 +93,7 @@ QUERYSTATUS updateMapel(data *datas, int *nPage, SQLHDBC *dbConn, Mapel updatedM
     SQLAllocHandle(SQL_HANDLE_STMT, *dbConn, &stmt);
     SQLPrepare(stmt, (SQLCHAR *)"UPDATE Mapel id_num = ?, id_mapel = ?, nama_mapel = ?, WHERE id_mapel = ?", SQL_NTS);
     SQLBindParameter(stmt, 1, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMapel.id_num), 0, updatedMapel.id_num, 0, NULL);
-    SQLBindParameter(stmt, 1, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMapel.id_mapel), 0, updatedMapel.id_mapel, 0, NULL);
+    SQLBindParameter(stmt, 2, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMapel.id_mapel), 0, updatedMapel.id_mapel, 0, NULL);
     SQLBindParameter(stmt, 3, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMapel.nama_mapel), 0, updatedMapel.nama_mapel, 0, NULL);
     ret = SQLExecute(stmt);
 
@@ -132,7 +132,6 @@ QUERYSTATUS deleteMapel(data *datas, int *nPage, SQLHDBC *dbConn, Mapel updatedM
     }
 
     SQLFreeHandle(SQL_HANDLE_STMT, *dbConn);
-
     switch (ret)
     {
     case SQL_SUCCESS:
