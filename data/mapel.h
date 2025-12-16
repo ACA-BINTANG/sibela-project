@@ -6,7 +6,7 @@
 #include <time.h>
 
 #include <unistd.h>
-#include "initDb.h"
+
 #include "../model/model.h"
 // #include "../libs/utils.h"
 #include "../types/dbTypes.h"
@@ -18,6 +18,6 @@
 QUERYSTATUS createMapel(InputField fields[], SQLHDBC *dbConn);
 void findAllMapel(data *datas, int *nPage, SQLHDBC *dbConn);
 QUERYSTATUS updateMapel(data *datas, int *nPage, SQLHDBC *dbConn, Mapel updatedMapel);
-QUERYSTATUS deleteMapel( SQLHDBC *dbConn, Mapel updatedMapel);
+QUERYSTATUS deleteMapel(SQLHDBC *dbConn, Mapel updatedMapel);
 
 #endif

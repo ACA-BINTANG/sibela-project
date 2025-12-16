@@ -7,7 +7,7 @@
 
 int main()
 {
-    InitWindow(1920, 1080, "Sibela");
+    InitWindow(1920, 1080, "SIBELA: Sistem Bimbingan Belajar");
 
     ToggleFullscreen();
 

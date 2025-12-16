@@ -9,8 +9,6 @@
 #include "../libs/utils.h"
 #include "../types/dbTypes.h"
 #include "../types/form.h"
-#include "initDb.h"
-
 
 Pengajar findPengajarbyPhoneNum(char PhoneNum[], SQLHDBC *dbConn);
 

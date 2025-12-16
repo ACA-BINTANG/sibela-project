@@ -6,7 +6,7 @@
 #include <time.h>
 
 #include <unistd.h>
-#include "initDb.h"
+
 #include "../model/model.h"
 // #include "../libs/utils.h"
 #include "../types/dbTypes.h"
