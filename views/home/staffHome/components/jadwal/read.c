@@ -1,7 +1,7 @@
 #include "read.h"
 #include "../../../../../libs/headers/raygui.h"
 
-void drawMuridRead(windowModel *windowM)
+void drawJadwalRead(windowModel *windowM)
 {
     int cell_width = 250;
     int cell_height = 50;
@@ -9,12 +9,12 @@ void drawMuridRead(windowModel *windowM)
     int start_y = 1080 / 2 - 300;
     int padding = 5;
     int font_size = 32;
-    DrawTextEx(windowM->fontStyle.regular, "DATA Murid",
+    DrawTextEx(windowM->fontStyle.regular, "DATA JADWAL",
                (Vector2){start_x + 390,
                          start_y - 120},
                64, 0,
                SIBELAWHITE);
-    for (int col = 0; col < 4; col++)
+    for (int col = 0; col < 5; col++)
     {
         Rectangle cellRect = {
             start_x + col * cell_width,
@@ -29,24 +29,29 @@ void drawMuridRead(windowModel *windowM)
                          start_y - cell_height + padding},
                font_size, 0,
                SIBELAWHITE);
-    DrawTextEx(windowM->fontStyle.regular, "Nama",
+    DrawTextEx(windowM->fontStyle.regular, "Nama Pengajar",
                (Vector2){start_x + 1 * cell_width + padding,
                          start_y - cell_height + padding},
                font_size, 0,
                SIBELAWHITE);
-    DrawTextEx(windowM->fontStyle.regular, "No. Hp",
+    DrawTextEx(windowM->fontStyle.regular, "Materi",
                (Vector2){start_x + 2 * cell_width + padding,
                          start_y - cell_height + padding},
                font_size, 0,
                SIBELAWHITE);
-    DrawTextEx(windowM->fontStyle.regular, "Password",
+    DrawTextEx(windowM->fontStyle.regular, "Jumlah Siswa",
                (Vector2){start_x + 3 * cell_width + padding,
                          start_y - cell_height + padding},
                font_size, 0,
                SIBELAWHITE);
-    for (int row = 0; row < windowM->datas.nMurid; row++)
+    DrawTextEx(windowM->fontStyle.regular, "Waktu",
+               (Vector2){start_x + 4 * cell_width + padding,
+                         start_y - cell_height + padding},
+               font_size, 0,
+               SIBELAWHITE);
+    for (int row = 0; row < windowM->datas.nJadwalPertemuan; row++)
     {
-        for (int col = 0; col < 4; col++)
+        for (int col = 0; col < 5; col++)
         {
             Rectangle cellRect = {
                 start_x + col * cell_width,
@@ -55,28 +60,33 @@ void drawMuridRead(windowModel *windowM)
                 cell_height};
             if (row == windowM->curPos)
             {
-                windowM->focusedData.murid = windowM->datas.murids[row];
+                windowM->focusedData.jadwal = windowM->datas.jadwalPertemuans[row];
                 DrawRectangleRec(cellRect, PRIMARY);
             }
             DrawRectangleLinesEx(cellRect, 1, SIBELAWHITE);
         }
-        DrawTextEx(windowM->fontStyle.regular, windowM->datas.murids[row].id_murid,
+        DrawTextEx(windowM->fontStyle.regular, windowM->datas.jadwalPertemuans[row].id_pertemuan,
                    (Vector2){start_x + 0 * cell_width + padding,
                              start_y + row * cell_height + padding},
                    font_size, 0,
                    SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, windowM->datas.murids[row].nama,
+        DrawTextEx(windowM->fontStyle.regular, windowM->datas.jadwalPertemuans[row].nama_pengajar,
                    (Vector2){start_x + 1 * cell_width + padding,
                              start_y + row * cell_height + padding},
                    font_size, 0,
                    SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, windowM->datas.murids[row].no_hp,
+        DrawTextEx(windowM->fontStyle.regular, windowM->datas.jadwalPertemuans[row].judul_materi,
                    (Vector2){start_x + 2 * cell_width + padding,
                              start_y + row * cell_height + padding},
                    font_size, 0,
                    SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, windowM->datas.murids[row].password,
+        DrawTextEx(windowM->fontStyle.regular, TextFormat("%ld", windowM->datas.jadwalPertemuans[row].jumlah_murid),
                    (Vector2){start_x + 3 * cell_width + padding,
+                             start_y + row * cell_height + padding},
+                   font_size, 0,
+                   SIBELAWHITE);
+        DrawTextEx(windowM->fontStyle.regular, windowM->datas.jadwalPertemuans[row].waktu,
+                   (Vector2){start_x + 4 * cell_width + padding,
                              start_y + row * cell_height + padding},
                    font_size, 0,
                    SIBELAWHITE);
@@ -92,7 +102,7 @@ void drawMuridRead(windowModel *windowM)
 
         if (res == 2)
         {
-            deleteMurid(windowM->dbConn, windowM->focusedData.murid);
+            // deleteMurid(windowM->dbConn, windowM->focusedData.murid);
             windowM->dataFetchers.staffPage[windowM->selectedPage](&windowM->datas, &windowM->datas.totalPages, windowM->dbConn);
             windowM->isModalShown = 0;
         }

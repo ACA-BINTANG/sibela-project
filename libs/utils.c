@@ -58,3 +58,12 @@ char *intToString(int i)
 
     return buff;
 }
+
+void clearFields(InputField fields[])
+{
+    for (int i = 0; i < 10; i++)
+    {
+        fields[i].value.charLen = 0;
+        strcpy(fields[i].value.text, "");
+    }
+}

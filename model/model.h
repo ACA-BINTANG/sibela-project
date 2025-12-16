@@ -20,6 +20,8 @@ typedef struct
     SQLSMALLINT nMapel;
     Materi Materis[100];
     SQLSMALLINT nMateri;
+    JadwalPertemuanWithDetails jadwalPertemuans[100];
+    SQLSMALLINT nJadwalPertemuan;
     int page;
     int totalPages;
 } data;

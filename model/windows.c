@@ -44,11 +44,24 @@ void initForm(windowModel *windowM)
     windowM->forms.staffPage[PENGAJAR].updateFunction = updatePengajar;
     windowM->forms.staffPage[RUANGAN].createFunc = createRuangan;
     windowM->forms.staffPage[RUANGAN].updateFunction = updateRuangan;
-    windowM->dataFetchers.admin[0] = findAllStaff;
-    windowM->dataFetchers.admin[1] = findAllMurid;
-    windowM->dataFetchers.admin[2] = findAllPengajar;
-    windowM->dataFetchers.admin[3] = findAllRuangan;
-    windowM->dataFetchers.admin[4] = findAllMapel;
+    windowM->dataFetchers.staffPage[STAFF] = findAllStaff;
+    windowM->dataFetchers.staffPage[MURID] = findAllMurid;
+    windowM->dataFetchers.staffPage[PENGAJAR] = findAllPengajar;
+    windowM->dataFetchers.staffPage[RUANGAN] = findAllRuangan;
+    windowM->dataFetchers.staffPage[MAPEL] = findAllMapel;
+    windowM->dataFetchers.staffPage[JADWAL] = findAllJadwalPertemuan;
+
+    windowM->forms.pengajarPage[MATERI].fields[1] = (InputField){.label = "ID MAPEL", .type = CUSTOMMODAL, .value = (InputParams){.charLen = 0, .text = ""}};
+    windowM->forms.pengajarPage[MATERI].fields[2] = (InputField){.label = "Judul Materi", .type = TEXTINPUT, .value = (InputParams){.charLen = 0, .text = ""}};
+    windowM->forms.pengajarPage[MATERI].fields[3] = (InputField){.label = "Isi Materi", .type = LONGTEXTINPUT, .value = (InputParams){.charLen = 0, .text = ""}};
+    windowM->forms.pengajarPage[MATERI].fields[4] = (InputField){.label = "SUBMIT", .type = BUTTONINPUT, .value = (InputParams){.charLen = 0, .text = ""}};
+    windowM->dataFetchers.pengajarPage[2] = findAllMateri;
+    windowM->forms.pengajarPage[MATERI].createFunc = createMateri;
+    windowM->forms.pengajarPage[MATERI].updateFunction = updateMateri;
+    windowM->forms.pengajarPage[MATERI].fieldPerPage = 4;
+    windowM->forms.pengajarPage[MATERI].nField = 4;
+    windowM->forms.pengajarPage[MATERI].optionFetcher[2] = findAllMapelSelect;
+    windowM->forms.pengajarPage[MATERI].selectedField = -1;
 }
 
 void initAssets(windowModel *windowM)

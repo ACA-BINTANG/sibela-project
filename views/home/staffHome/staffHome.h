@@ -26,6 +26,9 @@
 #include "components/murid/read.h"
 #include "components/murid/create.h"
 #include "components/murid/update.h"
+#include "components/jadwal/read.h"
+#include "components/jadwal/create.h"
+#include "components/jadwal/update.h"
 // #include "components/ruangan/update.h"
 
 void drawStaffHome(windowModel *windowM);

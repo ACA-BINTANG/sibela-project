@@ -1,5 +1,5 @@
-#ifndef materi
-#define materi
+#ifndef MATERI_H
+#define MATERI_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +16,6 @@
 QUERYSTATUS createMateri(InputField fields[], SQLHDBC *dbConn);
 void findAllMateri(data *datas, int *nPage, SQLHDBC *dbConn);
 QUERYSTATUS updateMateri(InputField fields[], SQLHDBC *dbConn);
-QUERYSTATUS deleteMateri(data *datas, int *nPage, SQLHDBC *dbConn, Materi updatedMateri);
+QUERYSTATUS deleteMateri(SQLHDBC *dbConn, Materi updatedMateri);
 
 #endif

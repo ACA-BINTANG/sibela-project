@@ -10,6 +10,8 @@
 #include "../data/ruangan.h"
 #include "../data/murid.h"
 #include "../data/pengajar.h"
+#include "../data/materi.h"
+#include "../data/jadwalPertemuan.h"
 
 typedef enum
 {
@@ -75,11 +77,12 @@ typedef struct
     char role[20];
 } user;
 
-typedef void (*fetcherAdmin)(data *datas, int *nPage, SQLHDBC *dbConn);
+typedef void (*fetcherFunc)(data *datas, int *nPage, SQLHDBC *dbConn);
 
 typedef struct
 {
-    fetcherAdmin admin[10];
+    fetcherFunc staffPage[10];
+    fetcherFunc pengajarPage[10];
 } fetcher;
 
 typedef struct
@@ -99,11 +102,18 @@ typedef struct
 
 typedef struct
 {
+    Select staffPage[10];
+} SelectByPage;
+
+typedef struct
+{
     Staf staff;
     Murid murid;
     Pengajar pengajar;
     Mapel mapel;
     Ruangan ruangan;
+    Materi materi;
+    JadwalPertemuanWithDetails jadwal;
 } FocusedData;
 
 typedef struct
@@ -114,6 +124,7 @@ typedef struct
 
 typedef struct
 {
+    SelectByPage selectByPage;
     WINDOWS currWindow;
     int shouldClose;
     int curPos;

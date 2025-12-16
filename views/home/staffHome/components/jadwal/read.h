@@ -1,5 +1,5 @@
-#ifndef MURIDHOME_MURID_READ_H
-#define MURIDHOME_MURID_READ_H
+#ifndef STAFFHOME_JADWAL_READ_H
+#define STAFFHOME_JADWAL_READ_H
 
 #include <stdio.h>
 #include <stdlib.h>

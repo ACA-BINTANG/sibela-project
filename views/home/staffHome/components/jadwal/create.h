@@ -1,5 +1,5 @@
-#ifndef MURIDHOME_MURID_READ_H
-#define MURIDHOME_MURID_READ_H
+#ifndef STAFFHOME_JADWAL_CREATE_H
+#define STAFFHOME_JADWAL_CREATE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +12,6 @@
 #include "../../../../../data/murid.h"
 #include "../../../../../constants/color.h"
 
-void drawJadwalRead(windowModel *windowM);
+void drawJadwalCreate(windowModel *windowM);
 
 #endif

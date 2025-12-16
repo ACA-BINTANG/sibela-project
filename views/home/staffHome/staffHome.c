@@ -52,6 +52,9 @@ void drawStaffHome(windowModel *windowM)
         case MAPEL:
             drawMapelRead(windowM);
             break;
+        case JADWAL:
+            drawJadwalRead(windowM);
+            break;
         default:
             DrawTextEx(windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), (Vector2){300 + 1620 / 2 - MeasureTextEx(windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), 80, 0).x / 2, 90}, 80, 0, SIBELAWHITE);
             break;
@@ -76,6 +79,9 @@ void drawStaffHome(windowModel *windowM)
         case MAPEL:
             drawMapelCreate(windowM);
             break;
+        case JADWAL:
+            drawJadwalCreate(windowM);
+            break;
         }
     }
 
@@ -97,6 +103,9 @@ void drawStaffHome(windowModel *windowM)
             break;
         case MAPEL:
             drawMapelUpdate(windowM);
+            break;
+        case JADWAL:
+            drawJadwalUpdate(windowM);
             break;
         }
     }

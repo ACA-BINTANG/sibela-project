@@ -20,7 +20,8 @@ typedef enum
     FRONTDESK
 } staf_role_enum;
 
-typedef enum{
+typedef enum
+{
     STAFF,
     MURID,
     PENGAJAR,
@@ -28,7 +29,14 @@ typedef enum{
     MAPEL,
     PEMBAYARAN,
     JADWAL
-} ADMINSUBWINDOW;
+} STAFFSUBWINDOW;
+
+typedef enum
+{
+    ABSENSI,
+    PERTEMUAN,
+    MATERI
+} PENGAJARSUBWINDOW;
 
 typedef struct
 {
@@ -41,6 +49,37 @@ typedef struct
     char no_hp[16];
     char password[101];
 } Murid;
+
+typedef struct
+{
+    int id_num;
+    char id_pertemuan[8];
+    char id_staff[9];
+    char id_pengajar[8];
+    char id_ruangan[7];
+    char id_materi[7];
+    char waktu[20];
+} JadwalPertemuan;
+
+typedef struct
+{
+    int id_num;
+    char id_jamur[9];
+    char id_murid[7];
+    char id_pertemuan[8];
+} JadwalMurid;
+
+typedef struct
+{
+    int id_num;
+    char id_pertemuan[8];
+    char nama_staff[101];
+    char nama_pengajar[101];
+    char lokasi[101];
+    char judul_materi[101];
+    int jumlah_murid;
+    char waktu[20];
+} JadwalPertemuanWithDetails;
 
 typedef struct
 {
@@ -86,6 +125,7 @@ typedef struct
     int id_num;
     char id_materi[7];
     char id_mapel[7];
+    char nama_mapel[101];
     char judul_materi[101];
     char isi_materi[256];
 } Materi;

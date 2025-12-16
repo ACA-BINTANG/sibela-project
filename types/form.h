@@ -14,8 +14,26 @@ typedef enum
     TEXTINPUT,
     BUTTONINPUT,
     SHORTINPUT,
-    NUMERICINPUT
+    NUMERICINPUT,
+    LONGTEXTINPUT,
+    CUSTOMMODAL
 } InputType;
+
+typedef struct
+{
+    char label[50];
+    char value[100];
+} SelectProp;
+
+typedef struct
+{
+    SelectProp Options[100];
+    int nOptions;
+    int page;
+    int nPage;
+    char searchQuery[100];
+    SelectProp selected;
+} Select;
 
 typedef struct
 {
@@ -25,6 +43,7 @@ typedef struct
 } InputField;
 
 typedef QUERYSTATUS (*mutationFunc)(InputField fields[], SQLHDBC *dbConn);
+typedef void (*selectOptionFetcher)(Select *selectObject, SQLHDBC *dbConn);
 
 typedef struct
 {
@@ -36,6 +55,8 @@ typedef struct
     int totalPages;
     int offset;
     int lastIndex;
+    int selectedField;
+    selectOptionFetcher optionFetcher[10];
 } FORM;
 
 #endif

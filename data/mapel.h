@@ -17,6 +17,7 @@
 
 QUERYSTATUS createMapel(InputField fields[], SQLHDBC *dbConn);
 void findAllMapel(data *datas, int *nPage, SQLHDBC *dbConn);
+void findAllMapelSelect(Select *selectObject, SQLHDBC *dbConn);
 QUERYSTATUS updateMapel(InputField fields[], SQLHDBC *dbConn);
 QUERYSTATUS deleteMapel(SQLHDBC *dbConn, Mapel updatedMapel);
 

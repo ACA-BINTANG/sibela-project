@@ -9,10 +9,6 @@
 
 void findAllMateri(data *datas, int *nPage, SQLHDBC *dbConn)
 {
-
-    if (datas->nMateri > 0)
-        return;
-
     SQLHSTMT stmt;
     SQLRETURN ret;
     int count;
@@ -35,7 +31,7 @@ void findAllMateri(data *datas, int *nPage, SQLHDBC *dbConn)
     *nPage = (int)ceil((float)count / limit);
 
     SQLAllocHandle(SQL_HANDLE_STMT, *dbConn, &stmt);
-    SQLPrepare(stmt, (SQLCHAR *)"SELECT * FROM materi ORDER BY id_materi DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY", SQL_NTS);
+    SQLPrepare(stmt, (SQLCHAR *)"SELECT m.id_num, id_materi, m.id_mapel, map.nama_mapel, judul_materi, isi_materi  FROM materi m, mapel map WHERE map.id_mapel = m.id_mapel ORDER BY id_materi DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY", SQL_NTS);
     SQLBindParameter(stmt, 1, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER, 0, 0, &offset, 0, NULL);
     SQLBindParameter(stmt, 2, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER, 0, 0, &limit, 0, NULL);
 
@@ -43,10 +39,8 @@ void findAllMateri(data *datas, int *nPage, SQLHDBC *dbConn)
 
     while (SQL_SUCCEEDED(ret = SQLFetch(stmt)))
     {
-        printf("Successfully fetched %lld rows\n", rowsFetched);
         char dateBuff[50];
         int i = (int)rowsFetched;
-        printf("awikwok %d\n", i);
 
         SQLGetData(stmt, 1, SQL_C_LONG,
                    &datas->Materis[i].id_num, sizeof(datas->Materis[i].id_num), NULL);
@@ -55,13 +49,14 @@ void findAllMateri(data *datas, int *nPage, SQLHDBC *dbConn)
         SQLGetData(stmt, 3, SQL_C_CHAR,
                    &datas->Materis[i].id_mapel, sizeof(datas->Materis[i].id_mapel), NULL);
         SQLGetData(stmt, 4, SQL_C_CHAR,
-                   &datas->Materis[i].judul_materi, sizeof(datas->Materis[i].judul_materi), NULL);
+                   &datas->Materis[i].nama_mapel, sizeof(datas->Materis[i].nama_mapel), NULL);
         SQLGetData(stmt, 5, SQL_C_CHAR,
+                   &datas->Materis[i].judul_materi, sizeof(datas->Materis[i].judul_materi), NULL);
+        SQLGetData(stmt, 6, SQL_C_CHAR,
                    &datas->Materis[i].isi_materi, sizeof(datas->Materis[i].isi_materi), NULL);
-        printf("materi %d: %s\n", i, datas->Materis[i].id_materi);
         rowsFetched++;
     }
-    datas->nStaf = rowsFetched;
+    datas->nMateri = rowsFetched;
     SQLFreeHandle(SQL_HANDLE_STMT, *dbConn);
 }
 
@@ -113,15 +108,17 @@ QUERYSTATUS updateMateri(InputField fields[], SQLHDBC *dbConn)
 
     Materi updatedMateri;
 
-    strcpy(updatedMateri.id_mapel, fields[0].value.text);
-    strcpy(updatedMateri.judul_materi, fields[1].value.text);
-    strcpy(updatedMateri.isi_materi, fields[2].value.text);
+    strcpy(updatedMateri.id_materi, fields[0].value.text);
+    strcpy(updatedMateri.id_mapel, fields[1].value.text);
+    strcpy(updatedMateri.judul_materi, fields[2].value.text);
+    strcpy(updatedMateri.isi_materi, fields[3].value.text);
 
     SQLAllocHandle(SQL_HANDLE_STMT, *dbConn, &stmt);
-    SQLPrepare(stmt, (SQLCHAR *)"UPDATE materi SET judul_materi = ?, isi_materi = ? WHERE id_materi = ?", SQL_NTS);
+    SQLPrepare(stmt, (SQLCHAR *)"UPDATE materi SET judul_materi = ?, isi_materi = ?, id_mapel = ? WHERE id_materi = ?", SQL_NTS);
     SQLBindParameter(stmt, 1, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMateri.judul_materi), 0, updatedMateri.judul_materi, 0, NULL);
     SQLBindParameter(stmt, 2, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMateri.isi_materi), 0, updatedMateri.isi_materi, 0, NULL);
-    SQLBindParameter(stmt, 3, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMateri.id_materi), 0, updatedMateri.id_materi, 0, NULL);
+    SQLBindParameter(stmt, 3, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMateri.id_mapel), 0, updatedMateri.id_mapel, 0, NULL);
+    SQLBindParameter(stmt, 4, SQL_PARAM_INPUT, SQL_C_CHAR, SQL_VARCHAR, strlen(updatedMateri.id_materi), 0, updatedMateri.id_materi, 0, NULL);
     ret = SQLExecute(stmt);
 
     if (SQL_SUCCEEDED(ret))
@@ -141,7 +138,7 @@ QUERYSTATUS updateMateri(InputField fields[], SQLHDBC *dbConn)
     }
 }
 
-QUERYSTATUS deleteMateri(data *datas, int *nPage, SQLHDBC *dbConn, Materi updatedMateri)
+QUERYSTATUS deleteMateri(SQLHDBC *dbConn, Materi updatedMateri)
 {
     SQLHSTMT stmt;
     SQLRETURN ret;

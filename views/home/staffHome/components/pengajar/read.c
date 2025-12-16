@@ -93,7 +93,7 @@ void drawPengajarRead(windowModel *windowM)
         if (res == 2)
         {
             deletePengajar(windowM->dbConn, windowM->focusedData.pengajar);
-            windowM->dataFetchers.admin[windowM->selectedPage](&windowM->datas, &windowM->datas.totalPages, windowM->dbConn);
+            windowM->dataFetchers.staffPage[windowM->selectedPage](&windowM->datas, &windowM->datas.totalPages, windowM->dbConn);
             windowM->isModalShown = 0;
         }
         else if (res >= 0 && res < 2)

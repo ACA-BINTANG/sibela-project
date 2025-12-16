@@ -1,5 +1,5 @@
-#ifndef STAFFHOME_MAPEL_READ_H
-#define STAFFHOME_MAPEL_READ_H
+#ifndef PENGAJARHOME_MATERI_READ_H
+#define PENGAJARHOME_MATERI_READ_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,9 +9,9 @@
 #include "../../../../../model/window.h"
 #include "../../../../../libs/utils.h"
 #include "../../../../../components/header.h"
-#include "../../../../../data/staf.h"
+#include "../../../../../data/materi.h"
 #include "../../../../../constants/color.h"
 
-void drawMapelRead(windowModel *windowM);
+void drawMateriRead(windowModel *windowM);
 
 #endif

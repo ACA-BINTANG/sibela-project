@@ -1,5 +1,5 @@
-#ifndef MURIDHOME_MURID_READ_H
-#define MURIDHOME_MURID_READ_H
+#ifndef PENGAJARHOME_MATERI_UPDATE_H
+#define PENGAJARHOME_MATERI_UPDATE_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,9 +9,9 @@
 #include "../../../../../model/window.h"
 #include "../../../../../libs/utils.h"
 #include "../../../../../components/header.h"
-#include "../../../../../data/murid.h"
+#include "../../../../../data/materi.h"
 #include "../../../../../constants/color.h"
 
-void drawJadwalRead(windowModel *windowM);
+void drawMateriUpdate(windowModel *windowM);
 
 #endif

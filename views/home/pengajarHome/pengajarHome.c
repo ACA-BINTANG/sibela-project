@@ -34,48 +34,36 @@ void drawPengajarHome(windowModel *windowM)
     int start_y = 1080 / 2 - 300;
     int padding = 5;
     int font_size = 32;
-    switch (windowM->selectedPage)
-    {
-    case 0:
 
-        DrawTextEx(windowM->fontStyle.regular, "Absensi",
-                   (Vector2){start_x + 390,
-                             start_y - 120},
-                   64, 0,
-                   SIBELAWHITE);
-        for (int col = 0; col < 4; col++)
+    if (windowM->activeSubWindow == READ)
+    {
+        switch (windowM->selectedPage)
         {
-            Rectangle cellRect = {
-                start_x + col * cell_width,
-                start_y - cell_height,
-                cell_width,
-                cell_height};
-            DrawRectangleLinesEx(cellRect, 1, SIBELAWHITE);
-            DrawRectangleLinesEx(cellRect, 1, SIBELAWHITE);
+        case MATERI:
+            drawMateriRead(windowM);
+            break;
+        default:
+            DrawTextEx(windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), (Vector2){300 + 1620 / 2 - MeasureTextEx(windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), 80, 0).x / 2, 90}, 80, 0, SIBELAWHITE);
+            break;
         }
-        DrawTextEx(windowM->fontStyle.regular, "Kelas",
-                   (Vector2){start_x + 0 * cell_width + padding,
-                             start_y - cell_height + padding},
-                   font_size, 0,
-                   SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, "Siswa",
-                   (Vector2){start_x + 1 * cell_width + padding,
-                             start_y - cell_height + padding},
-                   font_size, 0,
-                   SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, "Status",
-                   (Vector2){start_x + 2 * cell_width + padding,
-                             start_y - cell_height + padding},
-                   font_size, 0,
-                   SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, "Tanggal",
-                   (Vector2){start_x + 3 * cell_width + padding,
-                             start_y - cell_height + padding},
-                   font_size, 0,
-                   SIBELAWHITE);
-        break;
-    default:
-        DrawTextEx(windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), (Vector2){300 + 1620 / 2 - MeasureTextEx(windowM->fontStyle.medium, TextFormat("Halo, %s!", windowM->authUser.nama), 80, 0).x / 2, 90}, 80, 0, SIBELAWHITE);
-        break;
+    }
+
+    if (windowM->activeSubWindow == CREATE)
+    {
+        switch (windowM->selectedPage)
+        {
+        case MATERI:
+            drawMateriCreate(windowM);
+            break;
+        }
+    }
+    if (windowM->activeSubWindow == UPDATE)
+    {
+        switch (windowM->selectedPage)
+        {
+        case MATERI:
+            drawMateriUpdate(windowM);
+            break;
+        }
     }
 }

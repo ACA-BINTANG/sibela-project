@@ -14,5 +14,6 @@ time_t parseDate(char strDate[]);
 char *parseDateToString(time_t cDate);
 void copyStringData(char src[], InputParams *dest);
 char *intToString(int i);
+void clearFields(InputField fields[]);
 
 #endif

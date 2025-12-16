@@ -1,6 +1,7 @@
 #include "read.h"
+#include "../../../../../libs/headers/raygui.h"
 
-void drawMapelRead(windowModel *windowM)
+void drawMateriRead(windowModel *windowM)
 {
     int cell_width = 250;
     int cell_height = 50;
@@ -28,7 +29,7 @@ void drawMapelRead(windowModel *windowM)
                          start_y - cell_height + padding},
                font_size, 0,
                SIBELAWHITE);
-    DrawTextEx(windowM->fontStyle.regular, "id Mapel",
+    DrawTextEx(windowM->fontStyle.regular, "Mapel",
                (Vector2){start_x + 1 * cell_width + padding,
                          start_y - cell_height + padding},
                font_size, 0,
@@ -38,12 +39,7 @@ void drawMapelRead(windowModel *windowM)
                          start_y - cell_height + padding},
                font_size, 0,
                SIBELAWHITE);
-    DrawTextEx(windowM->fontStyle.regular, "isi Materi",
-               (Vector2){start_x + 3 * cell_width + padding,
-                         start_y - cell_height + padding},
-               font_size, 0,
-               SIBELAWHITE);
-    for (int row = 0; row < windowM->datas.nMapel; row++)
+    for (int row = 0; row < windowM->datas.nMateri; row++)
     {
         for (int col = 0; col < 3; col++)
         {
@@ -54,6 +50,7 @@ void drawMapelRead(windowModel *windowM)
                 cell_height};
             if (row == windowM->curPos)
             {
+                windowM->focusedData.materi = windowM->datas.Materis[row];
                 DrawRectangleRec(cellRect, PRIMARY);
             }
             DrawRectangleLinesEx(cellRect, 1, SIBELAWHITE);
@@ -63,7 +60,7 @@ void drawMapelRead(windowModel *windowM)
                              start_y + row * cell_height + padding},
                    font_size, 0,
                    SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, windowM->datas.Materis[row].id_mapel,
+        DrawTextEx(windowM->fontStyle.regular, windowM->datas.Materis[row].nama_mapel,
                    (Vector2){start_x + 1 * cell_width + padding,
                              start_y + row * cell_height + padding},
                    font_size, 0,
@@ -73,15 +70,23 @@ void drawMapelRead(windowModel *windowM)
                              start_y + row * cell_height + padding},
                    font_size, 0,
                    SIBELAWHITE);
-        DrawTextEx(windowM->fontStyle.regular, windowM->datas.Materis[row].isi_materi,
-                   (Vector2){start_x + 3 * cell_width + padding,
-                             start_y + row * cell_height + padding},
-                   font_size, 0,
-                   SIBELAWHITE);
     }
     DrawTextEx(windowM->fontStyle.regular, TextFormat("Halaman %d dari %d", windowM->datas.page, windowM->datas.totalPages),
                (Vector2){300 + (1620 / 2 - 30),
                          1000},
                40, 0,
                SIBELAWHITE);
+    if (windowM->isModalShown)
+    {
+        int res = GuiMessageBox((Rectangle){.height = 200, .width = 300, .x = 1920 / 2 - 150, .y = 1080 / 2 - 300}, "Delete Materi?", TextFormat("Apakah anda ingin menghapus materi %s?", windowM->focusedData.materi.judul_materi), "Batal;Hapus!");
+
+        if (res == 2)
+        {
+            deleteMateri(windowM->dbConn, windowM->focusedData.materi);
+            windowM->dataFetchers.pengajarPage[windowM->selectedPage](&windowM->datas, &windowM->datas.totalPages, windowM->dbConn);
+            windowM->isModalShown = 0;
+        }
+        else if (res >= 0 && res < 2)
+            windowM->isModalShown = 0;
+    }
 }
