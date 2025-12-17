@@ -10,7 +10,7 @@ void drawStaffHome(windowModel *windowM)
         (Menus){"Mata pelajaran", 0},
         (Menus){"Pembayaran", 0},
         (Menus){"Jadwal", 0},
-        (Menus){"Log Out", 1},
+        (Menus){"Keluar", 1},
     };
     int gap = 50;
     int startX = 35;

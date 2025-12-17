@@ -29,6 +29,9 @@ void updateView(windowModel *windowM)
         windowM->currWindow = STAFHOME;
         break;
     case KEY_F3:
+        windowM->currWindow = MURIDHOME;
+        break;
+    case KEY_F4:
         windowM->currWindow = PENGAJARHOME;
     }
     switch (windowM->currWindow)
@@ -461,7 +464,7 @@ void updateView(windowModel *windowM)
         case KEY_SPACE:
         case KEY_ENTER:
             // windowM->dataFetchers.pengajarPage[windowM->curPos](&windowM->datas, &windowM->datas.totalPages, windowM->dbConn);
-            if (windowM->curPos == 3)
+            if (windowM->curPos == 4)
             {
                 logoutFunction(windowM);
                 return;

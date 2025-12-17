@@ -12,6 +12,6 @@
 #include "../../../../../data/murid.h"
 #include "../../../../../constants/color.h"
 
-void drawJadwalRead(windowModel *windowM);
+void drawMuridRead(windowModel *windowM);
 
 #endif
