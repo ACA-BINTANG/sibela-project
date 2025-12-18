@@ -2,7 +2,7 @@
 #define RAYGUI_IMPLEMENTATION
 #include "../../../../../libs/headers/raygui.h"
 
-void drawJadwalRead(windowModel *windowM)
+void drawMuridRead(windowModel *windowM)
 {
     int cell_width = 250;
     int cell_height = 50;

@@ -3,10 +3,11 @@
 void drawMuridHome(windowModel *windowM)
 {
     Menus opsi[] = {
+        (Menus){"Profil", 0},
         (Menus){"Jadwal Pertemuan", 0},
         (Menus){"Materi", 0},
         (Menus){"Pembayaran", 0},
-        (Menus){"Log out", 1},
+        (Menus){"Keluar", 1},
     };
     int gap = 50;
     int startX = 35;
