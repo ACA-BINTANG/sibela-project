@@ -12,6 +12,7 @@
 #include "../data/pengajar.h"
 #include "../data/materi.h"
 #include "../data/jadwalPertemuan.h"
+#include "../data/pembayaran.h"
 #define MAX_LEGEND 10
 
 typedef enum
@@ -44,9 +45,10 @@ typedef struct
 {
     char nama[50];
     int targetPage;
-} NavMenus; 
+} NavMenus;
 
-typedef struct {
+typedef struct
+{
     const char *key;
     const char *desc;
 } LegendItem;
@@ -116,6 +118,7 @@ typedef struct
     Ruangan ruangan;
     Materi materi;
     JadwalPertemuanWithDetails jadwal;
+    PembayaranFetchAll pembayaran;
 } FocusedData;
 
 typedef struct

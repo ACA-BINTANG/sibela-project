@@ -29,6 +29,9 @@ typedef struct
     SQLSMALLINT nMateri;
     JadwalPertemuanWithDetails jadwalPertemuans[100];
     SQLSMALLINT nJadwalPertemuan;
+    PembayaranFetchAll pembayarans[100];
+    SQLSMALLINT nPembayaran;
+
     int page;
     int totalPages;
 } data;

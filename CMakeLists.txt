@@ -32,6 +32,7 @@ set(PACKAGES
     views/home/staffHome/components/jadwal/create.c
     views/home/staffHome/components/jadwal/read.c
     views/home/staffHome/components/jadwal/update.c
+    views/home/staffHome/components/pembayaran/read.c
     views/home/pengajarHome/pengajarHome.c
     views/home/pengajarHome/components/Materi/create.c
     views/home/pengajarHome/components/Materi/read.c
@@ -49,6 +50,7 @@ set(PACKAGES
     data/mapel.c
     data/pengajar.c
     data/materi.c
+    data/pembayaran.c
     data/jadwalPertemuan.c
     data/jadwalMurid.c
     components/header.c

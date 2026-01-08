@@ -142,6 +142,32 @@ typedef struct
     char isi_materi[256];
 } Materi;
 
+typedef struct
+{
+    int id_num;
+    char id_pembayaran[8];
+    char id_murid[7];
+    char tanggal_pembayaran[11];
+    double jumlah_pembayaran;
+    char mtd_pembayaran[11];
+    int dikonfirmasi;
+    char id_staff[9];
+} Pembayaran;
+
+typedef struct
+{
+    int id_num;
+    char id_pembayaran[16];
+    char id_murid[16];
+    char nama_murid[100];
+    char tanggal_pembayaran[20];
+    double jumlah_pembayaran;
+    int dikonfirmasi;
+    char id_staff[16];
+    char nama_staff[100];
+    char mtd_pembayaran[20];
+} PembayaranFetchAll;
+
 // typedef struct
 //     {
 //         SQLINTEGER id_num;

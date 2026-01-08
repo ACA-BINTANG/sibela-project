@@ -52,6 +52,9 @@ void drawStaffHome(windowModel *windowM)
         case MAPEL:
             drawMapelRead(windowM);
             break;
+        case PEMBAYARAN:
+            drawPembayaranRead(windowM);
+            break;
         case JADWAL:
             drawJadwalRead(windowM);
             break;

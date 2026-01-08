@@ -60,6 +60,7 @@ void initForm(windowModel *windowM)
     windowM->dataFetchers.staffPage[MAPEL] = findAllMapel;
     windowM->dataFetchers.staffPage[JADWAL] = findAllJadwalPertemuan;
     windowM->dataFetchers.muridPage[JADWALMURID] = findAllJadwalPertemuanByUserId;
+    windowM->dataFetchers.staffPage[PEMBAYARAN] = findAllPembayaran;
 
     windowM->forms.staffPage[JADWAL].fields[1] = (InputField){.label = "ID STAFF", .type = TEXTINPUT, .value = (InputParams){.charLen = 0, .text = ""}};
     windowM->forms.staffPage[JADWAL].fields[2] = (InputField){.label = "ID PENGAJAR", .type = CUSTOMMODAL, .value = (InputParams){.charLen = 0, .text = ""}};

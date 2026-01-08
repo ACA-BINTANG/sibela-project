@@ -117,8 +117,15 @@ void updateView(windowModel *windowM)
                     }
                     else if (ch == KEY_ENTER && windowM->forms.staffPage[windowM->selectedPage].selectedField >= 0 && windowM->forms.staffPage[windowM->selectedPage].fields[windowM->forms.staffPage[windowM->selectedPage].selectedField].type == CUSTOMMODALMULTI)
                     {
-                        windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].MultiSelected[windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].nMultiSelected] = windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].Options[windowM->curPos];
-                        windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].nMultiSelected++;
+                        if (!isOptionInMultiSelected(windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].Options[windowM->curPos], windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].MultiSelected, windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].nMultiSelected))
+                        {
+                            windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].MultiSelected[windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].nMultiSelected] = windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].Options[windowM->curPos];
+                            windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].nMultiSelected++;
+                        }
+                        else
+                        {
+                            popMultiSelectArray(windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].Options[windowM->curPos], windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].MultiSelected, &windowM->selectByPage.staffPage[windowM->selectedPage][windowM->forms.staffPage[windowM->selectedPage].selectedField].nMultiSelected);
+                        }
                     }
                     else
                     {
@@ -143,6 +150,8 @@ void updateView(windowModel *windowM)
                 switch (ch)
                 {
                 case KEY_N:
+                    clearFields(windowM->forms.staffPage[windowM->currWindow].fields);
+                    clearSelects(windowM->selectByPage.staffPage);
                     if (windowM->selectedPage == JADWAL)
                     {
                         strcpy(windowM->forms.staffPage[windowM->selectedPage].fields[1].value.text, windowM->authUser.id);
